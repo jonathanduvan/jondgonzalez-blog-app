@@ -1,7 +1,82 @@
-body {
-  font-family: "Roboto", sans-serif;
+$background-color: darken(white, 10%);
+$header-text-color: black;
+
+html, body, #main, #mainContainer {
+  font-family: 'Oswald', sans-serif;
   color: rgb(10%, 10%, 10%);
-  background: darken(white, 10%);
-  margin: 50px;
   font-size: 16px;
+  background-color: $background-color;
+  background-size: cover;
+  height: 100%;
+  margin:0;
+  padding:0;
+}
+
+#mainContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+  border: none;
+}
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+
+a:active {
+    text-decoration: none;
+}
+
+li {
+  list-style: none;
+
+}
+
+.Heading {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  flex: 1;
+
+  #newPost {
+    display: inline-block;
+    font-size: 1.249rem;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    border: 1px solid #F3F0F0;
+    border-radius: 4px;
+    background: #141E6F;
+    line-height: 3.749rem;
+    padding: 0 22px;
+  }
+}
+
+.newPost {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.newPost {
+  display: flex;
+  flex-flow: column nowrap;
+  .textEntry {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+  .buttons {
+    display: flex;
+    flex-flow: row nowrap;
+  }
 }
