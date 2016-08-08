@@ -10,7 +10,7 @@ export const ActionTypes = {
   // DELETE_POST: 'DELETE_POST',
 };
 
-const ROOT_URL = 'jondgonzalez-blog-server.herokuapp.com';
+const ROOT_URL = 'http://jondgonzalez-blog-server.herokuapp.com/';
 const API_KEY = '?key=J_Gonzalez';
 
 export function fetchPosts() {
