@@ -27,48 +27,64 @@ export function fetchPosts() {
 
 export function createPost(post) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/posts/${API_KEY}`, post)
-   .then(response => {
-     browserHistory.push('/');
-   })
-   .catch(error => {
-     console.log('something went wrong');
-   });
-  };
-}
-
-
-export function fetchPost(id) {
-  return (dispatch) => {
-    axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`)
-    .then(response => {
-      dispatch({ type: 'FETCH_POST', payload: { post: response.data } });
+    axios.post(`${ROOT_URL}/posts`, {
+      title: post.title,
+      tags: post.tags,
+      content: post.content,
     })
-    .catch(error => {
+    .then((response) => {
+      browserHistory.push('/');
+      dispatch({
+        type: ActionTypes.CREATE_POST,
+        payload: response.data,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
     });
   };
 }
 
-export function updatePost(id, post) {
+export function updatePost(post) {
   return (dispatch) => {
-    axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, post)
-    .then(response => {
-      dispatch(fetchPost(id));
+    axios.put(`${ROOT_URL}/posts/${post.id}`, post)
+    .then((response) => {
+      console.log(response);
+      browserHistory.push('/');
+      dispatch({
+        type: ActionTypes.UPDATE_POST,
+        payload: response.data,
+      });
     })
-    .catch(error => {
+    .catch((error) => {
+      console.log(error);
+    });
+  };
+}
 
+export function fetchPost(id) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/posts/${id}`).then((response) => {
+      dispatch({
+        type: ActionTypes.FETCH_POST,
+        payload: response.data,
+      });
+    }).catch((error) => {
+      console.log(error);
     });
   };
 }
 
 export function deletePost(id) {
   return (dispatch) => {
-    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`)
-    .then(response => {
+    axios.delete(`${ROOT_URL}/posts/${id}`).then((response) => {
       browserHistory.push('/');
-    })
-    .catch(error => {
-
+      dispatch({
+        type: ActionTypes.DELETE_POST,
+        payload: id,
+      });
+    }).catch((error) => {
+      console.log(error);
     });
   };
 }
