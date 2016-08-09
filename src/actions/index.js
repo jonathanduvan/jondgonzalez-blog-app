@@ -32,7 +32,7 @@ export function createPost(post) {
      browserHistory.push('/');
    })
    .catch(error => {
-
+     console.log('something went wrong');
    });
   };
 }
