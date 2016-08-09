@@ -27,19 +27,13 @@ export function fetchPosts() {
 
 export function createPost(post) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/posts`, {
-      title: post.title,
-      tags: post.tags,
-      content: post.content,
-    })
-    .then((response) => {
+    axios.post(`${ROOT_URL}/posts${API_KEY}`, post).then(response => {
       browserHistory.push('/');
       dispatch({
         type: ActionTypes.CREATE_POST,
         payload: response.data,
       });
-    })
-    .catch((error) => {
+    }).catch(error => {
       console.log(error);
     });
   };
