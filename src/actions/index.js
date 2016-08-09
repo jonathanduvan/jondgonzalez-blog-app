@@ -15,22 +15,9 @@ const API_KEY = '?key=J_Gonzalez';
 
 export function fetchPosts() {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/posts${API_KEY}`)
-    .then(response => {
-      dispatch({ type: 'FETCH_POSTS', payload: { posts: response.data } });
-    })
-    .catch(error => {
-
-    });
-  };
-}
-
-export function createPost(post) {
-  return (dispatch) => {
-    axios.post(`${ROOT_URL}/posts${API_KEY}`, post).then(response => {
-      browserHistory.push('/');
+    axios.get(`${ROOT_URL}/posts${API_KEY}`).then(response => {
       dispatch({
-        type: ActionTypes.CREATE_POST,
+        type: 'FETCH_POSTS',
         payload: response.data,
       });
     }).catch(error => {
@@ -39,31 +26,42 @@ export function createPost(post) {
   };
 }
 
-export function updatePost(post) {
+export function fetchPost(id) {
   return (dispatch) => {
-    axios.put(`${ROOT_URL}/posts/${post.id}`, post)
-    .then((response) => {
-      console.log(response);
-      browserHistory.push('/');
+    axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`).then(response => {
       dispatch({
-        type: ActionTypes.UPDATE_POST,
+        type: 'FETCH_POST',
         payload: response.data,
       });
-    })
-    .catch((error) => {
+    }).catch(error => {
       console.log(error);
     });
   };
 }
 
-export function fetchPost(id) {
+export function createPost(post) {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/posts/${id}`).then((response) => {
+    axios.post(`${ROOT_URL}/posts/${API_KEY}`, post).then(response => {
       dispatch({
-        type: ActionTypes.FETCH_POST,
+        type: 'CREATE_POST',
         payload: response.data,
       });
-    }).catch((error) => {
+      browserHistory.push('/');
+    }).catch(error => {
+      console.log(error);
+    });
+  };
+}
+
+export function updatePost(id, post) {
+  return (dispatch) => {
+    axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, post).then(response => {
+      dispatch({
+        type: 'UPDATE_POST',
+        payload: response.data,
+      });
+      browserHistory.push('/');
+    }).catch(error => {
       console.log(error);
     });
   };
@@ -71,13 +69,13 @@ export function fetchPost(id) {
 
 export function deletePost(id) {
   return (dispatch) => {
-    axios.delete(`${ROOT_URL}/posts/${id}`).then((response) => {
-      browserHistory.push('/');
+    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then(response => {
       dispatch({
-        type: ActionTypes.DELETE_POST,
-        payload: id,
+        type: 'DELETE_POST',
+        payload: response.data,
       });
-    }).catch((error) => {
+      browserHistory.push('/');
+    }).catch(error => {
       console.log(error);
     });
   };
