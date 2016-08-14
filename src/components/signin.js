@@ -36,17 +36,25 @@ class SignIn extends Component {
     this.setState({ password: '' });
   }
 
+
   render() {
     return (
       <div className="new">
         <h3>Sign In</h3>
-        <form className="newPost">
-          <input type="text" value={this.state.email} name="Title" placeholder="Email" onChange={this.onEmailChange} />
-          <input type="text" value={this.state.password} name="Title" placeholder="Password" onChange={this.onPasswordChange} />
-          <button type="submit" onSubmit={this.onSubmit}>Sign In</button>
+        <form onSubmit={this.onSubmit}>
+          <div>
+            <label htmlFor="email">Email</label>
+            <input onChange={this.onEmailChange} type="email" id="email" placeholder="email" value={this.state.email} />
+          </div>
+
+          <div>
+            <label htmlFor="password">Password</label>
+            <input onChange={this.onPasswordChange} type="password" id="password" placeholder="password" value={this.state.password} />
+          </div>
+
+          <button type="submit">Sign In</button>
           <Link to="/">Cancel</Link>
         </form>
-
       </div>
     );
   }
