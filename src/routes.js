@@ -1,17 +1,23 @@
+
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from './components/app';
+import Index from './containers/index';
+import New from './components/new';
+import Show from './components/show';
 
-import Index from './containers/index.js';
-import Show from './containers/show.js';
-import New from './containers/new.js';
+import SignIn from './components/signin';
+import SignUp from './components/signup';
 
+import RequireAuth from './components/require-auth';
 
 export default(
   <Route path="/" component={App}>
     <IndexRoute component={Index} />
-    <Route path="posts/new" component={New} />
+    <Route path="posts/new" component={RequireAuth(New)} />
     <Route path="posts/:id" component={Show} />
+    <Route path="signin" component={SignIn} />
+    <Route path="signup" component={SignUp} />
   </Route>
 );
