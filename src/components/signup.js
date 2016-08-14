@@ -51,11 +51,23 @@ class SignUp extends Component {
     return (
       <div className="new">
         <h3>Sign Up</h3>
-        <form className="newPost">
-          <input type="text" value={this.state.email} name="Title" placeholder="Email" onChange={this.onEmailChange} />
-          <input type="text" value={this.state.password} name="Title" placeholder="Password" onChange={this.onPasswordChange} />
-          <input type="text" value={this.state.name} name="Title" placeholder="Name" onChange={this.onNameChange} />
-          <button type="submit" onClick={this.Submit}>Create Account</button>
+        <form onSubmit={this.onSubmit}>
+          <div>
+            <label htmlFor="name">Name</label>
+            <input onChange={this.onNameChange} type="text" id="name" placeholder="name" value={this.state.name} />
+          </div>
+
+          <div>
+            <label htmlFor="email">Email</label>
+            <input onChange={this.onEmailChange} type="email" id="email" placeholder="email" value={this.state.email} />
+          </div>
+
+          <div>
+            <label htmlFor="password">Password</label>
+            <input onChange={this.onPasswordChange} type="password" id="password" placeholder="password" value={this.state.password} />
+          </div>
+
+          <button type="submit">Sign Up</button>
           <Link to="/">Cancel</Link>
         </form>
       </div>
