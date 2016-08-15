@@ -14,8 +14,8 @@ export const ActionTypes = {
 };
 
 // const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
-// const ROOT_URL = 'https://hw5-part2-blog-server.herokuapp.com/api';
-const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'https://hw5-part2-blog-server.herokuapp.com/api';
+// const ROOT_URL = 'http://localhost:9090/api';
 const API_KEY = '?key=J_Gonzalez';
 
 export function fetchPosts() {
@@ -59,21 +59,19 @@ export function deletePost(id) {
   );
 }
 
-export function createPost(title, tags, content) {
-  return (
-    (dispatch) => {
-      const fields = { title, content, tags };
-      axios.post(`${ROOT_URL}/posts${API_KEY}`, fields, { headers: { authorization: localStorage.getItem('token') } }).then(response => {
-      // do something with response.data  (some json)
-        dispatch({ type: 'CREATE_POST', payload: response.data });
-        browserHistory.push('/');
-      }).catch(error => {
-      // hit an error do something else!
+export function createPost(post) {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/posts/${API_KEY}`, post, { headers: { authorization: localStorage.getItem('token') } }).then(response => {
+      dispatch({
+        type: 'CREATE_POST',
+        payload: response.data,
       });
-    }
-  );
+      browserHistory.push('/');
+    }).catch(error => {
+      console.log(error);
+    });
+  };
 }
-
 export function updatePost(id, title, tags, content) {
   return (
     (dispatch) => {

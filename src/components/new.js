@@ -36,6 +36,7 @@ class New extends Component {
 
   onSubmit(event) {
     event.preventDefault();
+    console.log(this.state.title);
     this.props.createPost({
       title: this.state.title,
       tags: this.state.tags,
