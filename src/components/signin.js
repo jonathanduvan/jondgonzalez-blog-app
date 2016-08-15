@@ -20,17 +20,14 @@ class SignIn extends Component {
   }
   onEmailChange(event) {
     this.setState({ email: event.target.value });
-    console.log(this.state.email);
   }
 
   onPasswordChange(event) {
     this.setState({ password: event.target.value });
-    console.log(this.state.password);
   }
 
   onSubmit(event) {
     event.preventDefault();
-    event.stopPropagation();
     this.props.signinUser({ email: this.state.email, password: this.state.password });
     this.setState({ email: '' });
     this.setState({ password: '' });

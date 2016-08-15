@@ -14,8 +14,8 @@ export const ActionTypes = {
 };
 
 // const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
-const ROOT_URL = 'https://hw5-part2-blog-server.herokuapp.com/api';
-// const ROOT_URL = 'http://localhost:9090/api';
+// const ROOT_URL = 'https://hw5-part2-blog-server.herokuapp.com/api';
+const ROOT_URL = 'http://localhost:9090/api';
 const API_KEY = '?key=J_Gonzalez';
 
 export function fetchPosts() {
@@ -112,16 +112,22 @@ export function signinUser({ email, password }) {
 }
 
 export function signupUser({ email, password, username }) {
-  return (dispatch) => {
-    axios.post(`${ROOT_URL}/signup/${API_KEY}`, { email, password, username }).then(response => {
-      dispatch({ type: ActionTypes.AUTH_USER });
-      localStorage.setItem('token', response.data.token);
-      browserHistory.push('/');
-      console.log('user was signed up');
-    }).catch(error => {
-      dispatch(authError(`Sign Up Failed: ${error.response.data}`));
-    });
-  };
+  return (
+    (dispatch) => {
+      const fields = { email, password, username };
+      console.log('user was about to sign up');
+      console.log(`${email} ${password} ${username}`);
+      axios.post(`${ROOT_URL}/signup/${API_KEY}`, fields, { headers: { authorization: localStorage.getItem('token') } }).then(response => {
+      // do something with response.data  (some json)
+        dispatch({ type: ActionTypes.AUTH_USER });
+        localStorage.setItem('token', response.data.token);
+        // console.log(response.data);
+      }).catch(error => {
+      // hit an error do something else!
+        dispatch(authError(`Sign In Failed: ${error.response.data}`));
+      });
+    }
+  );
 }
 
 // deletes token from localstorage
